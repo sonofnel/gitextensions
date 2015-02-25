@@ -9,8 +9,14 @@ namespace Github3
 {
     public partial class OAuth : Form
     {
+        private string gitHubURL;
+
         public OAuth()
-        {
+        {   
+            gitHubURL = Github3.instance.GitHubBaseURL[Github3.instance.Settings];
+            if(String.IsNullOrEmpty(gitHubURL))
+              gitHubURL = "github.com";
+
             InitializeComponent();
         }
 
@@ -20,7 +26,7 @@ namespace Github3
             {
                 webBrowser1.ScriptErrorsSuppressed = true;
                 webBrowser1.CausesValidation = false;
-                string url = "https://github.com/login/oauth/authorize?client_id=" + GithubAPIInfo.client_id + "&scope=repo,public_repo";
+                string url = "https://"+ gitHubURL +"/login/oauth/authorize?client_id=" + GithubAPIInfo.client_id + "&scope=repo,public_repo";
                 this.webBrowser1.Navigate(url);
             }
             catch (NullReferenceException)

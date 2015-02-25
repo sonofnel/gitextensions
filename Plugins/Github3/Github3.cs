@@ -12,8 +12,8 @@ namespace Github3
 {
     class GithubAPIInfo
     {
-        internal static string client_id = "ebc0e8947c206610d737";
-        internal static string client_secret = "c993907df3f45145bf638842692b69c56d1ace4d";
+      internal static string client_id = "016a8cbf27b5711e80ac";
+      internal static string client_secret = "883954a23b36b6c7b2de64e3dfaab7d97322daf1";
     }
 
     class GithubLoginInfo
@@ -67,6 +67,7 @@ namespace Github3
     public class Github3 : GitPluginBase, IRepositoryHostPlugin
     {
         public StringSetting OAuthToken = new StringSetting("OAuth Token", "");
+        public StringSetting GitHubBaseURL = new StringSetting("GitHub:Enterprise URL", "");
         
         internal static Github3 instance;
         internal static Client github;
@@ -88,6 +89,7 @@ namespace Github3
         public override IEnumerable<ISetting> GetSettings()
         {
             yield return OAuthToken;
+            yield return GitHubBaseURL;
         }
 
         public override void Register(IGitUICommands gitUiCommands)
